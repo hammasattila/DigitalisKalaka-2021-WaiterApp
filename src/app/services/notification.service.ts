@@ -28,29 +28,45 @@ export class NotificationService {
       console.log(data)
       switch (data.type) {
         case 'PAY':
-          const pay = new Notification('Payment request', {
-            body: `A payment request has arrived from table ${data.tableId}.`,
-            icon: 'https://maxcdn.icons8.com/Share/icon/Finance/usd1600.png'
-          });
+          try {
+            const pay = new Notification('Payment request', {
+              body: `A payment request has arrived from table ${data.tableId}.`,
+              icon: 'https://maxcdn.icons8.com/Share/icon/Finance/usd1600.png'
+            });
+          } catch (err) {
+            console.error('Notification error', err);
+          }
           break;
         case 'NEED_WAITER':
-          const waiter = new Notification('Waiter request', {
-            body: `A waiter is request at table ${data.tableId}.`,
-            icon: 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/sign-question-icon.png'
-          });
+          try {
+            const waiter = new Notification('Waiter request', {
+              body: `A waiter is request at table ${data.tableId}.`,
+              icon: 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/sign-question-icon.png'
+            });
+          } catch (err) {
+            console.error('Notification error', err);
+          }
           break;
         case 'ORDER':
-          const order = new Notification('New Order', {
-            body: `A new order for table ${data.tableId}.`,
-            icon: 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/sign-question-icon.png',
-          });
-          this._api.addOrders(data.tableId, data.order);
+          try {
+            this._api.addOrders(data.tableId, data.order);
+            const order = new Notification('New Order', {
+              body: `A new order for table ${data.tableId}.`,
+              icon: 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/sign-question-icon.png',
+            });
+          } catch (err) {
+            console.error('Notification error', err);
+          }
           break;
         default:
-          const wtf = new Notification('What the fuck just arrived!', {
-            body: `Shit knows what notification just arrived.`,
-            icon: 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/sign-error-icon.png'
-          });
+          try {
+            const wtf = new Notification('What the fuck just arrived!', {
+              body: `Shit knows what notification just arrived.`,
+              icon: 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/sign-error-icon.png'
+            });
+          } catch (err) {
+            console.error('Notification error', err);
+          }
           break;
       }
     })

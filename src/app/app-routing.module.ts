@@ -4,8 +4,9 @@ import { TableDetailsComponent } from './components/table-details/table-details.
 import { TableListComponent } from './components/table-list/table-list.component';
 
 const routes: Routes = [
-  { path: 'tables', component: TableListComponent, pathMatch: 'full' },
-  { path: 'tables/:id', component: TableDetailsComponent, pathMatch: 'full' },
+  { path: '', redirectTo: 'tables', pathMatch: 'full' },
+  { path: 'tables', component: TableListComponent },
+  { path: 'tables/:id', component: TableDetailsComponent },
 ];
 
 @NgModule({

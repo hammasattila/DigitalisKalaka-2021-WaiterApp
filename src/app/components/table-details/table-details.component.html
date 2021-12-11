@@ -7,7 +7,7 @@
         <app-order-item [tableId]="this.table!.tableId" [item]="item"></app-order-item>
     </div>
 
-    <div *ngIf="" class="container">
+    <div *ngIf="this.table.status !== 'FREE'" class="container">
         <h1> Fizetendő: {{ calculatePayment() / 100 }} RON </h1>
     </div>
 
