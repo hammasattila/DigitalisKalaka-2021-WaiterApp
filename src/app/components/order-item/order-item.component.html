@@ -1,0 +1,12 @@
+<mat-card>
+    <mat-card-title class="flex" [ngClass]="hasButton()? '':'non-accionable'">
+        <div>
+            <p> {{ this.orderItem?.name }} </p>
+            <p style="font-size: 1rem; opacity: .8; margin-bottom: 0;"> Ár: {{ this.orderItem!.price / 100 }} RON </p>
+        </div>
+        <button *ngIf="hasButton()" mat-raised-button [color]="getColor()"
+            (click)="handleClick(this.orderItem!.status)">
+            {{ getActionString() }}
+        </button>
+    </mat-card-title>
+</mat-card>

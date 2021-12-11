@@ -1,0 +1,35 @@
+@use '@angular/material' as mat;
+@include mat.core();
+
+$waiter-app-primary: mat.define-palette(mat.$teal-palette, 900, 900, 900);
+$waiter-app-accent: mat.define-palette(mat.$amber-palette, 200, 900, 400);
+
+$waiter-app-warn: mat.define-palette(mat.$red-palette);
+
+$waiter-app-theme: mat.define-light-theme((
+  color: (
+    primary: $waiter-app-primary,
+    accent: $waiter-app-accent,
+    warn: $waiter-app-warn,
+  )
+));
+
+$waiter-app-dark-theme: mat.define-dark-theme((
+  color: (
+    primary: $waiter-app-primary,
+    accent: $waiter-app-accent,
+    warn: $waiter-app-warn,
+  )
+));
+
+@include mat.all-component-themes($waiter-app-theme);
+
+.darkMode {
+  @include mat.all-component-colors($waiter-app-dark-theme);
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.container {
+  padding: 0.5rem;
+}

@@ -1,0 +1,32 @@
+@use '@angular/material' as mat;
+
+mat-card-content {
+    padding: .5rem 0 0 0;
+}
+
+.table-free {
+    // background-color: #00330080!important
+        border-bottom: .5rem solid #003300C0;
+}
+
+.table-occupied {
+    // background-color: #7f000080!important
+    border-bottom: .5rem solid #7f0000C0;
+}
+
+.blink {
+    animation: blinker 1s linear infinite;
+}
+  
+@keyframes blinker {
+    0% {
+        background-color: #7f000080
+    }
+    50% {
+        opacity: .725;
+        background-color: #7f000080;
+    }
+    100% {
+        background-color: #7f000080
+    }
+}

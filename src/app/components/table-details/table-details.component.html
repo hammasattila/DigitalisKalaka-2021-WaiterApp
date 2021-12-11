@@ -1,0 +1,25 @@
+<div class="container">
+    <div fxLayout="row" fxLayoutAlign="space-evenly none">
+        <button mat-raised-button (click)="back()" style="width: 100%;"> Visszalépés </button>
+    </div>
+    <h1 style="text-align: center; opacity: .8;"> Asztal {{ this.table?.tableId }} </h1>
+    <div class="container" *ngFor="let item of this.getSortedOrders()">
+        <app-order-item [tableId]="this.table!.tableId" [item]="item"></app-order-item>
+    </div>
+
+    <div *ngIf="" class="container">
+        <h1> Fizetendő: {{ calculatePayment() / 100 }} RON </h1>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-evenly none">
+        <button *ngIf="hasToAccept()" mat-raised-button [color]="getColor('ORDERED')" class="fill"
+            (click)="handleClick('ORDERED')"> {{ getActionString('ORDERED') }} </button>
+        <button *ngIf="hasToDeliver()" mat-raised-button [color]="getColor('PREPARING')" class="fill"
+            (click)="handleClick('PREPARING')"> {{ getActionString('PREPARING') }} </button>
+        <button *ngIf="hasToPay()" mat-raised-button [color]="getColor('DELIVERED')" class="fill"
+            (click)="handleClick('DELIVERED')"> {{ getActionString('DELIVERED') }} </button>
+        <button *ngIf="!hasToPay() && !hasToDeliver() && this.table.status != 'FREE'" mat-raised-button color="primary"
+            class="fill" (click)="freeTable()"> Asztal felszabadítva </button>
+    </div>
+
+</div>

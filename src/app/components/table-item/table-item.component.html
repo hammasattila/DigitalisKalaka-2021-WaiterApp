@@ -1,0 +1,12 @@
+<mat-card [ngClass]="{ 'table-free' : this.table.status == 'FREE', 'table-occupied': this.table.status == 'OCCUPIED', 'blink': hasEvent() }" (click)="openTable()" >
+    <mat-card-title> Asztal {{ this.table.tableId }} </mat-card-title>
+    <mat-card-content>
+        <mat-chip-list aria-label="Fish selection">
+            <!-- <mat-chip *ngIf="this.table.status == 'FREE'"> Szabad </mat-chip> -->
+            <mat-chip *ngIf="hasUnacceptedOrder(table.elements)" color="primary" selected> Rendelés </mat-chip>
+            <mat-chip *ngIf="hasUndeliveredOrder(table.elements)" color="accent" selected>Kiszállítás</mat-chip>
+            <mat-chip *ngIf="hasUnpayedOrder(table.elements)" color="warn" selected>Fizetés</mat-chip>
+            <mat-chip selected style="opacity: 0;"></mat-chip>
+          </mat-chip-list>
+    </mat-card-content>
+</mat-card>
