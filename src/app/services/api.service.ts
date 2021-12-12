@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { IOrderItem } from '../models/order';
 import { Table } from '../models/table';
 
+const baseUrl = 'http://192.168.1.248:8081';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +14,7 @@ export class ApiService {
   constructor() { }
 
   async getAllTablesAndOrders(): Promise<Table[]> {
-    const tablesAndOrdersJSON = await fetch('http://192.168.1.248:8081/qrapp/orders/getOrders');
+    const tablesAndOrdersJSON = await fetch(`${baseUrl}/qrapp/orders/getOrders`);
     const tablesAndOrders = await tablesAndOrdersJSON.json();
     console.debug(tablesAndOrders);
     this.tables = tablesAndOrders;
@@ -20,7 +22,7 @@ export class ApiService {
   }
 
   async getOneTablesAndOrders(tableId: number): Promise<Table> {
-    const tableAndOrdersJSON = await fetch(`http://192.168.1.248:8081/qrapp/orders/getOrder?tableId=${tableId}`);
+    const tableAndOrdersJSON = await fetch(`${baseUrl}/qrapp/orders/getOrder?tableId=${tableId}`);
     const tableAndOrders = await tableAndOrdersJSON.json();
     console.debug(tableAndOrders);
     this.table = tableAndOrders;
@@ -72,7 +74,7 @@ export class ApiService {
 
   public async acceptOrder(...orderSelections: { tableId: number, productId: number }[]) {
     for (const orderSelection of orderSelections) {
-      await fetch('http://192.168.1.248:8081/qrapp/orders/setOrderedProductToPreparing', {
+      await fetch(`${baseUrl}/qrapp/orders/setOrderedProductToPreparing`, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -85,7 +87,7 @@ export class ApiService {
 
   public async deliverOrder(...orderSelections: { tableId: number, productId: number }[]) {
     for (const orderSelection of orderSelections) {
-      await fetch('http://192.168.1.248:8081/qrapp/orders/setOrderedProductToDelivered', {
+      await fetch(`${baseUrl}/qrapp/orders/setOrderedProductToDelivered`, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -98,7 +100,7 @@ export class ApiService {
 
   public async payOrder(...orderSelections: { tableId: number, productId: number }[]) {
     for (const orderSelection of orderSelections) {
-      await fetch('http://192.168.1.248:8081/qrapp/orders/setOrderedProductToPaid', {
+      await fetch(`${baseUrl}/qrapp/orders/setOrderedProductToPaid`, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -110,7 +112,7 @@ export class ApiService {
   }
 
   public async freeTable(tableId: number) {
-    await fetch(`http://192.168.1.248:8081/qrapp/orders/setTableToFree/${tableId}`)
+    await fetch(`${baseUrl}/qrapp/orders/setTableToFree/${tableId}`)
   }
 
 

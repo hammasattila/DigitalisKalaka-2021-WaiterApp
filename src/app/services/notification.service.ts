@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { io } from 'socket.io-client';
 import { ApiService } from './api.service';
 
-
+const baseUrl = '192.168.1.193:8881'
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class NotificationService {
 
   constructor(private _api: ApiService) {
     try {
-      this.socket = io("192.168.1.193:8881");
+      this.socket = io(`${baseUrl}`);
     } catch (error) {
       console.error('Failed to connect to notification server.', error);
     }
@@ -52,7 +52,8 @@ export class NotificationService {
             this._api.addOrders(data.tableId, data.order);
             const order = new Notification('New Order', {
               body: `A new order for table ${data.tableId}.`,
-              icon: 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/sign-question-icon.png',
+              // icon: 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/sign-question-icon.png',
+              icon: 'https://www.clipartmax.com/png/middle/86-862098_new-features-and-updates-released-new-icon-white-png.png',
             });
           } catch (err) {
             console.error('Notification error', err);
